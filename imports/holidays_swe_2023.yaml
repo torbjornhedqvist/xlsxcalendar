@@ -1,0 +1,25 @@
+---
+# Official holidays in Sweden for 2023.
+# Holidays, special days or non-business days which is happening any day in the week,
+# it can be weekdays or weekends. These will be marked with the weekend color and get a
+# special note below calendar in the column for the specific day, indicated by an
+# exclamation character [!]. Date keys should be in the YYYY-MM-DD format.
+# [Optional field]
+holidays:
+  2023-01-01: "New Year's Day"
+  2023-01-06: 'Epiphany Holiday, Trettondedag jul'
+  2023-04-07: 'Good Friday, Långfredagen'
+  2023-04-17: 'Easter Eve, Påskafton'
+  2023-04-09: 'Easter Sunday, Påskdagen'
+  2023-04-10: 'Easter Monday, Annandag påsk'
+  2023-05-01: 'First of May, Första maj'
+  2023-05-18: 'Ascension Day, Kristi himmelfärdsdag'
+  2023-05-28: 'The day of Pentecost, Pingstdagen'
+  2023-06-06: 'Swedish National Holiday, Sveriges nationaldag'
+  2023-06-23: 'Midsummer Eve, Midsommarafton'
+  2023-06-24: 'Midsummer Day, Mindsommardagen'
+  2023-11-04: 'All Saints Day, Alla helgons dag'
+  2023-12-24: 'Christmas Eve, Julafton'
+  2023-12-25: 'Christmas Day ,Juldagen'
+  2023-12-26: 'Boxing Day, Annandag jul'
+  2023-12-31: "New Year's Eve, Nyårsafton"

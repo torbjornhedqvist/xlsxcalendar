@@ -1,0 +1,107 @@
+---
+# Copyright (C) 2022 Torbjorn Hedqvist
+# All Rights Reserved You may use, distribute and modify this code under the
+# terms of the MIT license. See LICENSE file in the project root for full
+# license information.
+
+# Config file for xlsxcalendar.py
+# Note: If a configuration file with this content is not provided to the program,
+# the minimum input as command line arguments has to be start and end dates.
+
+# Start and end date of the complete calendar.
+# Can be overridden by command line arguments.
+# [Mandatory fields]
+start_date: "2022-11-13"
+end_date: "2023-01-26"
+
+# The heading in the left-most row of the calendar where you could put your team name,
+# activity or any other smart heading.
+# [Optional field]
+# content_heading: "Team/Activity"
+
+# A list of names or activities to be put under the heading.
+# Can be overridden by importer plugins
+# [Optional field], defaults to 10 empty rows if omitted.
+# content_entries:
+#   - 'Alice in wonderlands'
+#   - 'Bob the builder'
+#   - 'Joe'
+#   - 'Foo Bar'
+#   - 'Strange characters, åäöÅÄÖùé'
+
+# The path and file name of the generated Excel output file.
+# [Optional field], defaults to ./out.xlsx if omitted.
+# output_file: "~/mycalendar.xlsx"
+
+# The name of the worksheet and the color of the "tab" containing the worksheet name.
+# The name is not allowed to be longer than 32 characters and should not contain any
+# special characters.
+# [Optional fields]
+# worksheet_name: 'My Calendar'
+# worksheet_tab_color: '#ff9966' # Atomic tangerine
+
+# Holiday imports. A list of external yaml files containing holiday records
+# as described below. These will be consumed and merged with the holiday records and
+# if there is a conflict of two records for the same date key, the record in this
+# configuration file will take precedence over the imported files.
+# holiday_imports:
+#   - './imports/holidays_swe_2022.yaml'
+#   - './imports/holidays_swe_2023.yaml'
+
+# Holidays, special days or non-business days which is happening any day in the week,
+# it can be weekdays or weekends. These will be marked with the weekend color and get a
+# special note below calendar in the column for the specific day, indicated by an
+# exclamation character [!]. Date keys should be in the YYYY-MM-DD format.
+# [Optional field]
+# holidays:
+#   2022-05-27: 'Friday after Ascension Day, company paid day off'
+
+
+# Cell format "Theme" import. A separate file with pre-packaged cell_formats as described
+# in the next section. Note! Any setting in the section below will override the theme setting here.
+# This themes can also be provided as a command line argument with -t or --theme <file>.
+# theme_imports:  './imports/theme_mocca.yaml'
+
+# Options to change the defaults of the various calendar areas formatting of the cells with regards
+# to borders, alignment, color etc. Have a peek into util/cell_format.py or XlsxWriter
+# documentation for more inspiration.
+# Two commented examples on how to write your configuration under 'day' and 'weekend'.
+# Uncomment and run to see the effect in the generated calendar.
+# Good color schemes can be found at https://www.colorhexa.com/color-names
+# [Optional fields]
+# cell_formats:
+#   day:
+#     # 'border': 1
+#     # 'align': 'center'
+#     # 'fg_color': '#701c1c'
+#     # 'font_color': '#fff000'
+#   weekend:
+#     # {'border': 1, 'align': 'center', 'fg_color': '#701c1c'}
+#   week_odd:
+#     # Modify with your preferences
+#   week_even:
+#     # Modify with your preferences
+#   month_odd:
+#     # Modify with your preferences
+#   month_even:
+#     # Modify with your preferences
+#   year_odd:
+#     # Modify with your preferences
+#   year_even:
+#     # Modify with your preferences
+#   content_heading:
+#     # Modify with your preferences
+
+# If you want to import data from an external file into the calendar you have to specify an
+# appropriate importer plugin module that can read the format of the imported data and write it to
+# the currently created calendar in the correct rows and columns. You can only specify one plugin
+# module at a time.
+# [Optional fields]
+# importer_module: 'plugins.template_importer'
+# importer_module: 'plugins.ess_importer'
+
+# The file the importer plugin should consume. If an importer module is defined, this file
+# also has to be provided, either here as a optional field or from command line options.
+# [Optional fields]
+# importer_file: './tests/ess_test_within_year.csv'
+# importer_file: './tests/ess_test_cross_years.csv'

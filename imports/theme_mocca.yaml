@@ -1,0 +1,32 @@
+---
+# A brownish palette theme.
+# To be imported in central configuration file or called from command line.
+
+cell_formats:
+  day:
+    # Cosmic latte: #fff8e7
+    {'border': 1, 'align': 'center', 'fg_color': '#fff8e7'}
+  weekend:
+    # Dark sienna: #3c1414
+    {'border': 1, 'align': 'center', 'fg_color': '#3c1414', 'font_color': '#ffffff'}
+  week_odd:
+    # Deep coffee: #704241
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#704241', 'font_color': '#ffffff'}
+  week_even:
+  # Desert sand: #edc9af
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#edc9af'}
+  month_odd:
+  # Café noir: #4B3621
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#4B3621', 'font_color': '#ffffff'}
+  month_even:
+    # Café au lait: #a67b5b
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#a67b5b'}
+  year_odd:
+    # Bulgarian rose: #480607
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#480607', 'font_color': '#ffffff'}
+  year_even:
+    # Burly wood: #DEB887
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#DEB887'}
+  content_heading:
+    # Dark brown: #654321
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#654321', 'font_color': '#ffffff'}
