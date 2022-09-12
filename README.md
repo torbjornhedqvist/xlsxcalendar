@@ -1,5 +1,7 @@
 # xlsxcalendar
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 With *xlsxcalendar* you can create a MS Excel calendar for any date range in
 seconds.
 
@@ -32,5 +34,6 @@ More information about setup, all bells and whistles for configuration can
 be read about under the [documentation][docs].
 
 ![](./documentation/images/enhanced_cal1.png)
+
 
 [docs]: ./documentation/README.md
