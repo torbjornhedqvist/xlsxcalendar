@@ -11,6 +11,7 @@ custom defined calendar file and write the results in to the currently created c
 from abc import ABC, abstractmethod
 import xlsxwriter
 from util.config import Config
+from util.cell_format import CellFormat
 
 class AbstractImporter(ABC):
     """
@@ -30,7 +31,7 @@ class AbstractImporter(ABC):
 
 
     @abstractmethod
-    def plot(self, conf: Config, workbook: xlsxwriter.Workbook) -> bool:
+    def plot(self, conf: Config, workbook: xlsxwriter.Workbook, cform: CellFormat) -> bool:
         """
         A plot method which will plot out the content in the newly created calender.
         This method should be called after the main calendar is created.

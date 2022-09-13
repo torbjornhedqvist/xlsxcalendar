@@ -140,7 +140,7 @@ def main():
 
     # If we have an importer loaded it means we can plot the content from the imported file.
     if conf.importer:
-        if conf.importer.plot(conf, workbook) is True:
+        if conf.importer.plot(conf, workbook, cform) is True:
             print(f'Calendar successfully created. To be stored in {conf.output_file}')
         else:
             print('Parts of the imports seems to have failed, see the log for more info.')

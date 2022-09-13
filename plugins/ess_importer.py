@@ -13,6 +13,7 @@ import csv
 import xlsxwriter
 from plugins.abstract_importer import AbstractImporter
 from util.config import Config
+from util.cell_format import CellFormat
 
 log = logging.getLogger(__name__)
 class Importer(AbstractImporter):
@@ -182,7 +183,7 @@ class Importer(AbstractImporter):
         return None
 
 
-    def plot(self, conf: Config, workbook: xlsxwriter.Workbook) -> bool:
+    def plot(self, conf: Config, workbook: xlsxwriter.Workbook, cform: CellFormat) -> bool:
         """
         Plot the imported ESS csv formatted input in the currently created calendar.
 
@@ -222,9 +223,16 @@ class Importer(AbstractImporter):
                         log.warning('Cannot continue the plotting with unreliable data, skip plot.')
                         return False
 
-                    if entry in ('O', 'H'):
-                        continue # weekends or holidays, skip
-                    if entry == 'P':
+                    if entry == 'O':
+                        continue # weekend, skip
+                    if entry == 'H':
+                        # This is a holiday and it might be an imported local holiday not covered by
+                        # configured holidays, make sure it will be marked in the calendar as well.
+                        log.debug("entry row=%s", conf.day_row + row)
+                        log.debug("entry column=%s", conf.start_col + delta + day)
+                        worksheet.write(conf.day_row + row, conf.start_col + delta + day,
+                                        '', cform.weekend)
+                    elif entry == 'P':
                         worksheet.write(conf.day_row + row, conf.start_col + delta + day,
                                         entry, planned_absence_format)
                     elif entry == 'A':
