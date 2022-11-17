@@ -1,0 +1,32 @@
+---
+# A Christmas inspired palette theme.
+# To be imported in central configuration file or called from command line.
+
+cell_formats:
+  day:
+    # Magic mint: #aaf0d1
+    {'border': 1, 'align': 'center', 'fg_color': '#aaf0d1'}
+  weekend:
+    # Crimson Red: #990033
+    {'bold': True, 'border': 1, 'align': 'center', 'fg_color': '#990033', 'font_color': '#FFCC00'}
+  week_odd:
+    # Cadmium green: #006b3c
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#006b3c', 'font_color': '#ffffff'}
+  week_even:
+  # Celadon: #ace1af
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#ace1af'}
+  month_odd:
+  # Dark olive green: #556b2f
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#556b2f', 'font_color': '#ffffff'}
+  month_even:
+    # Dark sea green: #8fbc8f
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#8fbc8f'}
+  year_odd:
+    # Dark Brown: #632523
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#632523', 'font_color': '#ffffff'}
+  year_even:
+    # Dollar bill: #85bb65
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#85bb65'}
+  content_heading:
+    # Fern green: #4f7942
+    {'bold': True, 'border': 2, 'align': 'center', 'fg_color': '#4f7942', 'font_color': '#ffffff'}
