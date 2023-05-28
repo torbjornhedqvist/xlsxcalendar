@@ -11,6 +11,7 @@ from datetime import date, timedelta
 import logging
 import csv
 import xlsxwriter
+import pandas
 from plugins.abstract_importer import AbstractImporter
 from util.config import Config
 from util.cell_format import CellFormat
@@ -157,6 +158,18 @@ class Importer(AbstractImporter):
         in the calendar, or None if failing to read file.
         """
         log.debug('Enter')
+        if '.xlsx' in filename:
+            log.debug('%s seems to be in xlsx format, needs to be converted to a cvs file',
+                      filename)
+            read_xlsx_file = pandas.read_excel(filename)
+            filename = filename.replace('.xlsx', '.csv')
+            log.debug('New filename is %s', filename)
+            read_xlsx_file.to_csv(filename, sep = ';',
+                                  index = None,
+                                  header = True,
+                                  encoding='iso-8859-1')
+            log.info('xlsx formatted file converted to semicolon separated csv file')
+
         try:
             with open(filename, encoding='ISO-8859-1', newline='') as csv_file:
                 csv_reader = csv.reader(csv_file, delimiter=';', quotechar='|')
@@ -211,8 +224,11 @@ class Importer(AbstractImporter):
                 for day in range(len(record[1])):
                     entry = record[1][day]
                     if entry == '':
+                        # TODO: Add check here if this is different in generated calendar.
+                        # Can be different weekend rules for different countries.
                         continue # empty, skip
-
+                    else:
+                        log.debug('entry=%s', entry)
                     # This is an extra check to see that the weekends are aligned as the
                     # __is_dates_in_range() only catches if the imports and the calendar is
                     # within reasonable diff ~6 month, larger diff can slip through.
@@ -224,6 +240,7 @@ class Importer(AbstractImporter):
                         return False
 
                     if entry == 'O':
+                        log.debug('O, weekend and skip')
                         continue # weekend, skip
                     if entry == 'H':
                         # This is a holiday and it might be an imported local holiday not covered by

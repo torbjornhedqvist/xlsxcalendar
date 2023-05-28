@@ -7,8 +7,20 @@ and [PyYAML][pyyaml]. Make sure to install them first. Example on how to do
 below:
 
 ```bash
+# Use pip or pip3 dependent on your environment settings.
 pip install pyyaml
 pip install xlsxwriter
+```
+
+If you are using the `/plugin/ess_importer.py` plugin there are two additional
+modules required. This is to enable to possibility to automatically convert
+from Excel formatted to semicolon formatted CSV file format. Example on how
+to do below:
+
+```bash
+# Use pip or pip3 dependent on your environment settings.
+pip install pandas
+pip install openpyxl
 ```
 
 When this is done you can clone the *xlsxcalendar* repository or downloading it
