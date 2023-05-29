@@ -186,7 +186,7 @@ this example: `importer_module: 'plugins.ess_importer'`.
 The plugins should be stored in the *xlsxcalendar* subdirectory /plugins
 and the repo contains a bare minimum template named
 `plugins/template_importer.py` and a working implementation using an
-export format used within my organization in `plugins/ess_importer.py`
+export format used within an organization in `plugins/ess_importer.py`
 
 You can also speficy the data file which should be imported with the option
 `importer_file: "filepath/filename"` or you can specify this file from
