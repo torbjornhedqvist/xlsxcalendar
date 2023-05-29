@@ -131,3 +131,6 @@ dmypy.json
 # Lab Excel files
 *.xls
 *.xlsx
+
+# My local working files
+*_tobbe.*
