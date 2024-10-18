@@ -5,6 +5,7 @@ pandas==2.2.3
 python-dateutil==2.8.2
 pytz==2023.3
 PyYAML==6.0.2
+setuptools==75.2.0
 six==1.16.0
 tzdata==2023.3
 XlsxWriter==3.1.2
