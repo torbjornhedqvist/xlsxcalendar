@@ -1,6 +1,35 @@
 # User guide
 
-## Setup
+## Setup: Using virtual environment or manual installation
+
+### Setup using a virtual environment
+This setup is verified with python 3.12.3. Start with cloning the 
+*xlsxcalendar* repository.
+
+```bash
+# Change the directory to the root of the repository
+cd <repo-root>
+# Setup the virtual environment
+python3 -m venv env
+# Activate the virtual environment
+source env/bin/activate
+# Install the required modules provided in requirements.txt
+pip install -r requirements.txt
+```
+Now you are ready to go, jump over the manual setup/installation to the 
+*Configuration* section below:
+
+### Manual setup/installation
+The setup below is verified with python 3.6 and if you try to install with 
+python 3.12 or later you will get errors as a dependent package `distutils`
+is no longer supported. It was deprecated in Python 3.10 by PEP 632 
+“Deprecate distutils module”. For projects still using distutils and cannot
+be updated to something else, the setuptools project can be installed: 
+it still provides distutils.
+```bash
+# Use pip or pip3 dependent on your environment settings.
+pip install setuptools
+```
 
 *xlsxcalendar* requires two open source modules [Xlsxwriter][xlsxwriter]
 and [PyYAML][pyyaml]. Make sure to install them first. Example on how to do
