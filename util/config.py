@@ -56,13 +56,15 @@ class Config:
         self._cell_formats_content_heading = None
 
         # Static config which should not be tampered with.
-        self._start_col = 1 # "B"
+        self._start_col = 1 # "Sheet Column B"
+        self._week_days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
         # These are also static config but more safe to tamper with.
-        self._year_row = 2  # "3"
+        self._year_row = 2  # "Sheet Row 3"
         self._month_row = self._year_row + 1
         self._week_row = self._year_row + 2
-        self._day_row = self._year_row + 3
+        self._day_of_week_row = self._year_row + 3
+        self._day_row = self._year_row + 4
 
     def load_config(self, args: dict) -> bool:
         """Try to load a config file if it exists.
@@ -357,6 +359,14 @@ class Config:
         return self._start_col
 
     @property
+    def week_days(self) -> list:
+        """A list with shortcut strings for the week days, 
+        static value and should not be changed.
+        """
+        return self._week_days
+
+
+    @property
     def year_row(self) -> int:
         """Year heading row.
         """
@@ -373,6 +383,12 @@ class Config:
         """Week heading row.
         """
         return self._week_row
+
+    @property
+    def day_of_week_row(self) -> int:
+        """Week heading row.
+        """
+        return self._day_of_week_row
 
     @property
     def day_row(self) -> int:

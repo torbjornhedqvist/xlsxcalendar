@@ -11,7 +11,7 @@ TODO: Add a better description
 import logging
 import logging.config
 import argparse
-from datetime import timedelta
+from datetime import timedelta, date
 import sys
 import xlsxwriter
 from util.config import Config
@@ -97,7 +97,7 @@ def main():
     # Loop over all dates in the range from start date to end date day by day and
     # populate the calendar heading, (year/month/week/day) and all the rows below.
     for day in range(total_days):
-        current_date = (conf.start_date + timedelta(days = day))
+        current_date = conf.start_date + timedelta(days = day)
         dateinfo.next.week = int(current_date.strftime('%V'))
         if is_week_merged(worksheet, conf, cform, day, dateinfo) is True:
             dateinfo.offset.week = day + 1
@@ -116,8 +116,12 @@ def main():
         # Finally write the next date and if it's a weekend update all cells for all defined
         # rows with a "weekend" formatting.
         if int(current_date.strftime('%u')) < 6: # Weekday
+            worksheet.write(conf.day_of_week_row, conf.start_col + day,
+                            conf.week_days[current_date.weekday()], cform.day)
             worksheet.write(conf.day_row, conf.start_col + day, current_date.day, cform.day)
         else: # Weekend
+            worksheet.write(conf.day_of_week_row, conf.start_col + day,
+                            conf.week_days[current_date.weekday()], cform.weekend)
             worksheet.write(conf.day_row, conf.start_col + day, current_date.day, cform.weekend)
             for rows in range(conf.content_num_rows):
                 worksheet.write(conf.day_row + rows + 1, conf.start_col + day, '', cform.weekend)
@@ -125,6 +129,8 @@ def main():
         # See if this day is found in the list of holidays, if yes mark it as a weekend and
         # add a note with the reason text.
         if conf.holidays.get(current_date) is not None:
+            worksheet.write(conf.day_of_week_row, conf.start_col + day,
+                            conf.week_days[current_date.weekday()], cform.weekend)
             worksheet.write(conf.day_row, conf.start_col + day, current_date.day, cform.weekend)
             for rows in range(conf.content_num_rows):
                 worksheet.write(conf.day_row + rows + 1, conf.start_col + day, '', cform.weekend)
