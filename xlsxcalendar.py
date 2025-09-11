@@ -11,7 +11,7 @@ TODO: Add a better description
 import logging
 import logging.config
 import argparse
-from datetime import timedelta, date
+from datetime import timedelta
 import sys
 import xlsxwriter
 from util.config import Config
