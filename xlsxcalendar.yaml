@@ -40,6 +40,10 @@ end_date: "2023-01-26"
 # worksheet_name: 'My Calendar'
 # worksheet_tab_color: '#ff9966' # Atomic tangerine
 
+# The language code used for the week day shortcuts in ISO 639 two letter format.
+# The supported language codes are: en (default), sv, fi, and es
+# worksheet_day_of_week_language: 'en'
+
 # Holiday imports. A list of external yaml files containing holiday records
 # as described below. These will be consumed and merged with the holiday records and
 # if there is a conflict of two records for the same date key, the record in this

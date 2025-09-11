@@ -24,13 +24,14 @@ class Config:
         """Constructor.
         """
 
-        # Defaults
+        # Defaults, might be overridden later by configuration file.
         self._filename = "./xlsxcalendar.yaml"
         self._start_date = None
         self._end_date = None
         self._output_file = './output.xlsx'
         self._worksheet_name = '- Calendar -'
         self._worksheet_tab_color = '#ff9966'
+        self._week_days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
         self._content_heading = 'Title/Heading'
         self._content_col_size = len(self._content_heading)
         self._content_entries = []
@@ -57,7 +58,6 @@ class Config:
 
         # Static config which should not be tampered with.
         self._start_col = 1 # "Sheet Column B"
-        self._week_days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
 
         # These are also static config but more safe to tamper with.
         self._year_row = 2  # "Sheet Row 3"
@@ -98,6 +98,23 @@ class Config:
 
             if loaded_config.get('worksheet_tab_color') is not None:
                 self._worksheet_tab_color = loaded_config.get('worksheet_tab_color')
+
+            # Check for supported week day language in ISO 639 two letter format
+            if loaded_config.get('worksheet_day_of_week_language') is not None:
+                supported_languages = ['en', 'sv', 'es', 'fi']
+                language = loaded_config.get('worksheet_day_of_week_language')
+                if language in supported_languages:
+                    if language == 'en':
+                        pass # Default, do nothing
+                    elif language == 'sv':
+                        self._week_days = ["Må", "Ti", "On", "To", "Fr", "Lö", "Sö"]
+                    elif language == 'es':
+                        self._week_days = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sá", "Do"]
+                    else: # Only finnish remains
+                        self._week_days = ["Ma", "Ti", "Ke", "To", "Pe", "La", "Su"]
+                else:
+                    log.error('Not a supported language: %s', language)
+                    return False
 
             if loaded_config.get('content_heading') is not None:
                 self._content_heading = loaded_config.get('content_heading')
