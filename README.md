@@ -30,7 +30,7 @@ Will create a calendar as described in the simple screenshot below.
 Instead of installing *xlsxcalendar* locally is to use the Dockerhub container
 as described with this example:
 ```bash
-
+docker run -v /home/username:/container/mnt --rm torbjornhedqvist/xlsxcalendar -s 2025-09-01 -e 2025-09-20
 ```
 
 
