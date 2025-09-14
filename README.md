@@ -27,6 +27,13 @@ Will create a calendar as described in the simple screenshot below.
 
 ![](./documentation/images/basic_cal1.png)
 
+Instead of installing *xlsxcalendar* locally is to use the Dockerhub container
+as described with this example:
+```bash
+
+```
+
+
 Enabling features like color-themes, local-holidays and importer plugin the
 generated calendar can be much more advanced as in the screenshot below.
 
