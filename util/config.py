@@ -5,6 +5,7 @@ All Rights Reserved You may use, distribute and modify this code under the
 terms of the MIT license. See LICENSE file in the project root for full
 license information.
 """
+import os
 import logging
 import importlib
 from datetime import date
@@ -28,7 +29,11 @@ class Config:
         self._filename = "./xlsxcalendar.yaml"
         self._start_date = None
         self._end_date = None
-        self._output_file = './output.xlsx'
+        if os.path.isdir('/container/mnt/'):
+            # Called from inside a container
+            self._output_file = '/container/mnt/output.xlsx'
+        else:
+            self._output_file = './output.xlsx'
         self._worksheet_name = '- Calendar -'
         self._worksheet_tab_color = '#ff9966'
         self._week_days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]

@@ -31,7 +31,18 @@ end_date: "2023-01-26"
 
 # The path and file name of the generated Excel output file.
 # [Optional field], defaults to ./out.xlsx if omitted.
+# Example in a native os below:
 # output_file: "~/mycalendar.xlsx"
+#
+# In case you plan to execute inside the docker container the filename
+# must be prepended with /container/mnt/ as in the example below:
+# output_file: '/container/mnt/mycalendar.xlsx' 
+#
+# And an example for user bob if he has his configuration file in his home directory,
+# and how to mount the filesystem when running the docker container:
+# docker run -v /home/bob:/container/mnt --rm xlsxcalendar -c /container/mnt/config.yaml
+#
+# Important note! Always use absolute paths as in the example above.
 
 # The name of the worksheet and the color of the "tab" containing the worksheet name.
 # The name is not allowed to be longer than 32 characters and should not contain any
