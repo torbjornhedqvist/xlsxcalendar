@@ -1,6 +1,6 @@
 # User guide
 
-## Setup: Using virtual environment or manual installation
+## Setup: Using virtual environment, Docker or manual installation
 
 ### Setup using a virtual environment
 This setup is verified with python 3.12.3. Start with cloning the 
@@ -16,8 +16,24 @@ source env/bin/activate
 # Install the required modules provided in requirements.txt
 pip install -r requirements.txt
 ```
-Now you are ready to go, jump over the manual setup/installation to the 
-*Configuration* section below:
+
+Now you are ready to go, jump to the *Configuration* section below.
+
+### Setup using Dockerhub image
+Pull the xlsxcalendar container image from DockerHub with:
+```bash
+docker pull torbjornhedqvist/xlsxcalendar:latest
+```
+
+When installed see below for a simple example
+```bash
+docker run -v /home/username:/container/mnt --rm torbjornhedqvist/xlsxcalendar -s 2025-09-01 -e 2025-09-20
+```
+Replace `/home/username` with your preferred absolute path where you want
+the output excel calendar to be stored. The mount point must be exactly as 
+in the example `/container/mnt`.
+
+Now you are ready to go, jump to the *Configuration* section below.
 
 ### Manual setup/installation
 The setup below is verified with python 3.6 and if you try to install with 
