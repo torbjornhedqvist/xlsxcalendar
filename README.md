@@ -32,7 +32,9 @@ as described with this example:
 ```bash
 docker run -v /home/username:/container/mnt --rm torbjornhedqvist/xlsxcalendar -s 2025-09-01 -e 2025-09-20
 ```
-
+Replace `/home/username` with your preferred absolute path where you want
+the output excel calendar to be stored. The mount point must be exactly as 
+in the example `/container/mnt`.
 
 Enabling features like color-themes, local-holidays and importer plugin the
 generated calendar can be much more advanced as in the screenshot below.
