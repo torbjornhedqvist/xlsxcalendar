@@ -1,5 +1,20 @@
 # XlsxCalendar Program Flow
 
+### The program creates Excel calendars by:
+1. Main Flow: Parsing arguments, loading configuration, creating workbook, and iterating through 
+each day in the date range
+2. Configuration Module: Handles YAML config loading, themes, holidays, and plugin initialization
+3. Cell Formatting: Manages different visual styles for days, weekends, weeks, months, and years
+4. Date Tracking: Keeps track of current week/month/year boundaries for proper cell merging
+5. Layout Module: Sets up the static worksheet structure and grid
+6. Merge & Trim Module: Handles merging cells for week/month/year headers and trimming calendar 
+boundaries
+7. Plugin System: Extensible importer system for adding external data (like CSV files) to the 
+calendar
+
+The flowchart shows how the program processes each day sequentially, checking for boundary changes 
+and applying appropriate formatting, with optional data import capabilities through plugins.
+
 ```mermaid
 flowchart TD
     A[Start xlsxcalendar.py] --> B[Parse Command Line Arguments]
