@@ -63,7 +63,7 @@ def main_page():
 
     ui.label('XlsxCalendar Configuration').classes('text-h4 q-mb-md')
 
-    with ui.card().classes('w-full max-w-4xl').style('background-color: #CCFFE5'):
+    with ui.card().classes('w-full max-w-4xl').style('background-color: #F0F8FF'):
         with ui.expansion('Dates', icon='calendar_today').classes('w-full'):
             ui.label('Provide the start and end date of the complete calendar to be '
                      'generated. Note! If you are using an importer module ensure the '
@@ -96,7 +96,7 @@ def main_page():
             content_heading = ui.input('Content Heading',
                                        value=config.get('content_heading', ''),
                                        placeholder='Team/Activity').classes('w-full').style(
-                                           'font-size: 200%; background-color: #f5f5f5')
+                                           f'font-size: 100%; background-color: {TEXTBOX_COLOR}')
             content_entries = ui.textarea('Content Entries (one per line)',
                                           value='\n'.join(config.get('content_entries', []))
                                           if config.get('content_entries') else '')
@@ -115,7 +115,8 @@ def main_page():
                                           value='\n'.join([f'{k}: {v}' for k, v in
                                                            config.get('holidays',
                                                                       {}).items()])).classes(
-                                              'w-full').style('background-color: #f5f5f5')
+                                                'w-full').style(
+                                                    f'background-color: {TEXTBOX_COLOR}')
 
         with ui.expansion('Themes', icon='palette').classes('w-full'):
             ui.label('Information section').classes('text-caption text-grey-6 q-mb-sm')
