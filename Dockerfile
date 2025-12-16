@@ -7,5 +7,11 @@ COPY . /xlsxcalendar
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Command to run your application
-ENTRYPOINT ["python", "xlsxcalendar.py"]
+# Make entrypoint script executable
+RUN chmod +x entrypoint.sh
+
+# Expose port for web interface
+EXPOSE 8080
+
+# Use the flexible entrypoint script
+ENTRYPOINT ["./entrypoint.sh"]
