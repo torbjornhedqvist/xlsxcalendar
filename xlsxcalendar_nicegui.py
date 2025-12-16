@@ -190,28 +190,15 @@ def main_page():
             importer_module = ui.radio(['None', 'plugins.ess_importer'],
                                        value='None' if not config.get('importer_module')
                                        else config.get('importer_module'))
-            with ui.row().classes('w-full items-center gap-2'):
-                importer_file = ui.input('Importer File',
-                                         value=config.get('importer_file', ''),
-                                         placeholder='./tests/ess_test_within_year.csv'
-                                         ).classes('flex-grow')
-
-                async def browse_file():
-                    # pylint: disable=import-outside-toplevel
-                    import tkinter as tk
-                    from tkinter import filedialog
-                    root = tk.Tk()
-                    root.withdraw()
-                    file_path = filedialog.askopenfilename(
-                        filetypes=[("CSV files", "*.csv"),
-                                   ("Excel files", "*.xlsx;*.xls"),
-                                   ("All files", "*.*")]
-                    )
-                    root.destroy()
-                    if file_path:
-                        importer_file.value = file_path
-
-                ui.button('Browse', on_click=browse_file).classes('w-20')
+            ui.separator().style('background-color: #A0A0A0; height: 1px;')
+            ui.label('If you run the web gui in a docker container make sure you map the path '
+                     'for the importer file to match the configured mount point for the '
+                     'container.').classes('text-caption text-blue-8 q-mb-sm')            
+            importer_file = ui.input('Importer File',
+                                     value=config.get('importer_file', ''),
+                                     placeholder='/data/input.xlsx .csv or appropriate '
+                                     'type for your plugin').classes('w-full').style(
+                                         f'font-size: 100%; background-color: {TEXTBOX_COLOR}')
             ui.separator().style('background-color: #003366; height: 2px;')
 
         output_expansion = ui.expansion('Output', icon='save').classes('w-full')
@@ -221,7 +208,7 @@ def main_page():
                      'Downloads folder.').classes('text-caption text-blue-8 q-mb-sm')
             output_file = ui.input('Output File',
                                    value=config.get('output_file', ''),
-                                   placeholder='./output.xlsx').classes('w-full').style(
+                                   placeholder='output.xlsx').classes('w-full').style(
                                        f'font-size: 100%; background-color: {TEXTBOX_COLOR}')
             ui.separator().style('background-color: #003366; height: 2px;')
 
