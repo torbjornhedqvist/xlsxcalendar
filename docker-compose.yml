@@ -1,0 +1,20 @@
+services:
+  xlsxcalendar-web:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./output:/xlsxcalendar/output
+    command: ["--web"]
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  xlsxcalendar-cli:
+    build: .
+    volumes:
+      - ./output:/xlsxcalendar/output
+      - ./config:/xlsxcalendar/config
+    profiles:
+      - cli
+    # Override entrypoint for CLI usage
+    # Example: docker-compose --profile cli run xlsxcalendar-cli -s 2024-01-01 -e 2024-12-31
