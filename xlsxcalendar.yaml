@@ -11,8 +11,8 @@
 # Start and end date of the complete calendar.
 # Can be overridden by command line arguments.
 # [Mandatory fields]
-start_date: "2022-11-13"
-end_date: "2023-01-26"
+start_date: "2026-01-01"
+end_date: "2026-01-31"
 
 # The heading in the left-most row of the calendar where you could put your team name,
 # activity or any other smart heading.
