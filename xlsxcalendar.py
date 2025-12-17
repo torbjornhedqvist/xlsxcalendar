@@ -92,7 +92,7 @@ def main():
     # logging.debug('Just a dummy DEBUG test')
     conf = Config()
     if conf.load_config(args) is False:
-        logging.error('Failed to')
+        logging.error('Failed to load configuration file')
         sys.exit(1)
 
     total_days = (conf.end_date - conf.start_date).days + 1 # +1 to include the last day

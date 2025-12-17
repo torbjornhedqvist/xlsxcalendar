@@ -200,6 +200,7 @@ class Config:
                 self._start_date = self.__str_to_date(args.get('start_date'))
                 self._end_date = self.__str_to_date(args.get('end_date'))
                 return True
+            log.error('%s', error)
             print(error)
             print("Add configuration file or provide required args. Use option -h for help")
             return False
