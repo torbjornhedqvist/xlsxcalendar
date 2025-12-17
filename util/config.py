@@ -26,14 +26,11 @@ class Config:
         """
 
         # Defaults, might be overridden later by configuration file.
-        self._filename = "./xlsxcalendar.yaml"
+        self._filename = 'dummy_x4zt-Bl' # Dummy filename to avoid loading a config file
+        self._log_level = 'INFO'
         self._start_date = None
         self._end_date = None
-        if os.path.isdir('/container/mnt/'):
-            # Called from inside a container
-            self._output_file = '/container/mnt/output.xlsx'
-        else:
-            self._output_file = './output.xlsx'
+        self._output_file = './output.xlsx'
         self._worksheet_name = '- Calendar -'
         self._worksheet_tab_color = '#ff9966'
         self._week_days = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
@@ -73,8 +70,9 @@ class Config:
 
     def load_config(self, args: dict) -> bool:
         """Try to load a config file if it exists.
-        Returns True if a minimum requirement of start_date and end_date is provided,
-        else returns False.
+        If there is no config file, first check if the default output filename and path is
+        overridden from command line and set it accordingly and then test if the minimal 
+        requirement of start_date and end_date is provided, it this is not met return False.
         """
 
         if args.get('config_file') is not None:
@@ -171,8 +169,6 @@ class Config:
             # Check for importer plugins and files
             self._importer_module = loaded_config.get('importer_module')
             self._importer_file = loaded_config.get('importer_file')
-            if args.get('import_file') is not None:
-                self._importer_file = args.get('import_file')
             if self._importer_module is not None and self._importer_file is not None:
                 # Import the plugin and load the file, update the content column related
                 # attributes on success.
@@ -193,7 +189,14 @@ class Config:
             return True
 
         except IOError as error:
+            if args.get('output_file') is not None:
+                log.debug('output_file "%s" provided from command line args', 
+                          args.get('output_file'))
+                self._output_file = args.get('output_file')
             if args.get('start_date') is not None and args.get('end_date') is not None:
+                # This is the last resort to produce a calendar with minimal input provided
+                log.debug('start_date=%s, end_date=%s provided from command line args',
+                          args.get('start_date'), args.get('end_date'))
                 self._start_date = self.__str_to_date(args.get('start_date'))
                 self._end_date = self.__str_to_date(args.get('end_date'))
                 return True

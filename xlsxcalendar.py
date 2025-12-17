@@ -34,10 +34,12 @@ def parse_args() -> dict:
                         help="End date of calendar, using format YYYY-MM-DD")
     parser.add_argument("-c", "--config-file", type=str,
                         help="Specify alternate configuration input file in yaml format")
-    parser.add_argument("-i", "--import-file", type=str,
-                        help="data file to be imported into the calendar.")
+    parser.add_argument("-o", "--output-file", type=str,
+                        help="Specify alternate output path and file, default is ./output.xlsx")
     parser.add_argument("-l", "--log-level", type=str,
                         help="Set the log level, default is INFO")
+    parser.add_argument("-f", "--log-file", type=str,
+                        help="Change the default log file path and name")
     return vars(parser.parse_args())
 
 
@@ -72,6 +74,13 @@ def main():
     logging.config.fileConfig('./util/logging.conf')
     if args.get('log_level') is not None:
         numeric_level = getattr(logging, args.get('log_level').upper())
+        # Test
+        if args.get('log_file') is not None:
+            for handler in logging.getLogger().handlers:
+                if isinstance(handler, logging.FileHandler):
+                    handler.close()  # Close current file
+                    handler.baseFilename = args.get('log_file')
+                    handler.stream = handler._open()  # Open new log file
         logging.getLogger().setLevel(numeric_level)
         # pylint: disable=E1101
         for logger in logging.root.manager.loggerDict:
