@@ -30,19 +30,19 @@ end_date: "2026-01-31"
 #   - 'Strange characters, åäöÅÄÖùé'
 
 # The path and file name of the generated Excel output file.
-# [Optional field], defaults to ./out.xlsx if omitted.
-# Example in a native os below:
+# [Optional field], defaults to ./output.xlsx if omitted.
+# If an output file has been provided as a command line argument, this setting will be ignored. 
+# Example in a native OS below:
 # output_file: "~/mycalendar.xlsx"
 #
-# In case you plan to execute inside the docker container the filename
-# must be prepended with /container/mnt/ as in the example below:
-# output_file: '/container/mnt/mycalendar.xlsx' 
+# NOTE1! In case you plan to execute inside the docker container the default file name of the 
+# generated Excel output file MUST be overridden in this configuration file. 
+# The filename # must be prepended with the mounted volume as in this example:
+# $ docker run --rm -v $(pwd):/data torbjornhedqvist/xlsxcalendar -c /data/docker_config.yaml
+# In this case the output file must have the same path as in the example below:
+# output_file: '/data/mycalendar.xlsx' 
 #
-# And an example for user bob if he has his configuration file in his home directory,
-# and how to mount the filesystem when running the docker container:
-# docker run -v /home/bob:/container/mnt --rm xlsxcalendar -c /container/mnt/config.yaml
-#
-# Important note! Always use absolute paths as in the example above.
+# NOTE2! Always use absolute paths as in the example above.
 
 # The name of the worksheet and the color of the "tab" containing the worksheet name.
 # The name is not allowed to be longer than 32 characters and should not contain any
@@ -60,8 +60,8 @@ end_date: "2026-01-31"
 # if there is a conflict of two records for the same date key, the record in this
 # configuration file will take precedence over the imported files.
 # holiday_imports:
-#   - './imports/holidays_swe_2022.yaml'
-#   - './imports/holidays_swe_2023.yaml'
+#   - './imports/holidays_swe_2025.yaml'
+#   - './imports/holidays_swe_2026.yaml'
 
 # Holidays, special days or non-business days which is happening any day in the week,
 # it can be weekdays or weekends. These will be marked with the weekend color and get a

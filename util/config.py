@@ -96,6 +96,12 @@ class Config:
             if loaded_config.get('output_file') is not None:
                 self._output_file = loaded_config.get('output_file')
 
+            # Override above if an output file has been provided as a command line argument
+            if args.get('output_file') is not None:
+                log.debug('output_file "%s" provided from command line args, override '
+                          'configuration file settings.', args.get('output_file'))
+                self._output_file = args.get('output_file')
+
             if loaded_config.get('worksheet_name') is not None:
                 self._worksheet_name = loaded_config.get('worksheet_name')
 
