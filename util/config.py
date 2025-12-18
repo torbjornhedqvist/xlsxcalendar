@@ -5,7 +5,6 @@ All Rights Reserved You may use, distribute and modify this code under the
 terms of the MIT license. See LICENSE file in the project root for full
 license information.
 """
-import os
 import logging
 import importlib
 from datetime import date
@@ -168,8 +167,9 @@ class Config:
                     print(error, "Abandon all holiday imports, please fix the error.")
                     self._holidays = {}
 
-            # And now add (merge) the configuration file's local holidays.
+            # And now add (merge) the configuration file's local holidays if any configured.
             if loaded_config.get('holidays') is not None:
+                log.debug('Merge local holidays: %s', loaded_config.get('holidays'))
                 self._holidays.update(loaded_config.get('holidays'))
 
             # Check for importer plugins and files
@@ -196,7 +196,7 @@ class Config:
 
         except IOError as error:
             if args.get('output_file') is not None:
-                log.debug('output_file "%s" provided from command line args', 
+                log.debug('output_file "%s" provided from command line args',
                           args.get('output_file'))
                 self._output_file = args.get('output_file')
             if args.get('start_date') is not None and args.get('end_date') is not None:
