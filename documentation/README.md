@@ -25,51 +25,39 @@ Pull the xlsxcalendar container image from DockerHub with:
 docker pull torbjornhedqvist/xlsxcalendar:latest
 ```
 
-When installed see below for a simple example
-```bash
-docker run -v /home/username:/container/mnt --rm torbjornhedqvist/xlsxcalendar -s 2025-09-01 -e 2025-09-20
-```
-Replace `/home/username` with your preferred absolute path where you want
-the output excel calendar to be stored. The mount point must be exactly as 
-in the example `/container/mnt`.
+When installed see some simple examples in my Dockerhub project at
+[torbjornhedqvist/xlsxcalendar][dockerhub]
 
 Now you are ready to go, jump to the *Configuration* section below.
 
 ### Manual setup/installation
-The setup below is verified with python 3.6 and if you try to install with 
-python 3.12 or later you will get errors as a dependent package `distutils`
-is no longer supported. It was deprecated in Python 3.10 by PEP 632 
-“Deprecate distutils module”. For projects still using distutils and cannot
-be updated to something else, the setuptools project can be installed: 
-it still provides distutils.
+This setup is verified with python 3.12.3. Start with cloning the 
+*xlsxcalendar* repository.
+
+Use pip or pip3 dependent on your environment settings.
+
+We have a dependecy to distutils which was deprecated in Python 3.10 
+by PEP 632. The setuptools still provides distutils.
 ```bash
-# Use pip or pip3 dependent on your environment settings.
 pip install setuptools
 ```
 
 *xlsxcalendar* requires two open source modules [Xlsxwriter][xlsxwriter]
-and [PyYAML][pyyaml]. Make sure to install them first. Example on how to do
-below:
-
+and [PyYAML][pyyaml]. Make sure to install them first.
 ```bash
-# Use pip or pip3 dependent on your environment settings.
 pip install pyyaml
 pip install xlsxwriter
 ```
 
 If you are using the `/plugin/ess_importer.py` plugin there are two additional
 modules required. This is to enable to possibility to automatically convert
-from Excel formatted to semicolon formatted CSV file format. Example on how
-to do below:
-
+from Excel formatted to semicolon formatted CSV file format.
 ```bash
-# Use pip or pip3 dependent on your environment settings.
 pip install pandas
 pip install openpyxl
 ```
 
-When this is done you can clone the *xlsxcalendar* repository or downloading it
-as a zip file, unpack and you are ready to go.
+## Configuration
 
 The first and simplest test is to create an empty calendar with all default
 values and just providing a start and end date from command line.
@@ -83,8 +71,7 @@ python3 ./xlsxcalendar.py -s 2022-11-13 -e 2023-01-26
 The default output excel file will be stored in the current directory as
 `./output.xlsx`
 
-## Configuration
-
+### Using a configuration file
 All configuration can be handled through the `./xlsxcalendar.yaml`
 configuration file. All, except the mandatory start and end date
 options are commented out by default. Browse through the configuration file
@@ -260,3 +247,4 @@ correct place in the calendar.
 [pyyaml]: https://github.com/yaml/pyyaml
 [colorhexa]: https://www.colorhexa.com/color-names
 [plugin]: ../plugins/abstract_importer.py
+[dockerhub]: https://hub.docker.com/r/torbjornhedqvist/xlsxcalendar
