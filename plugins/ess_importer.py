@@ -227,16 +227,17 @@ class Importer(AbstractImporter):
                         # TODO: Add check here if this is different in generated calendar.
                         # Can be different weekend rules for different countries.
                         continue # empty, skip
-                    else:
-                        log.debug('entry=%s', entry)
+
+                    log.debug('entry=%s', entry)
+
                     # This is an extra check to see that the weekends are aligned as the
                     # __is_dates_in_range() only catches if the imports and the calendar is
                     # within reasonable diff ~6 month, larger diff can slip through.
                     current_date = (conf.start_date + timedelta(days = day + delta))
                     if entry == 'O' and not self.__is_weekend(current_date):
                         log.debug('current_date=%s', current_date)
-                        log.warning('The weekends in calendar and imports are not in sync.')
-                        log.warning('Cannot continue the plotting with unreliable data, skip plot.')
+                        log.error('The weekends in calendar and imports are not in sync.')
+                        log.error('Cannot continue the plotting with unreliable data, skip plot.')
                         return False
 
                     if entry == 'O':
@@ -269,5 +270,5 @@ class Importer(AbstractImporter):
                             legend_planned_absence_format)
             log.debug('Exit: True')
             return True
-        log.warning('Imported file date range outside calendar range, skip plot.')
+        log.error('Imported file date range outside calendar range, skip plot.')
         return False
