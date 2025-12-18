@@ -1,0 +1,14 @@
+start_date: "2025-12-01"
+end_date: "2026-01-31"
+
+output_file: './mycalendar.xlsx'
+
+holiday_imports:
+  - './imports/holidays_swe_2025.yaml'
+  - './imports/holidays_swe_2026.yaml'
+
+theme_imports:  './imports/theme_mocca.yaml'
+
+holidays:
+  2025-12-10: 'Insert new'
+  2025-12-24: 'Test and replace'
