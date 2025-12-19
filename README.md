@@ -21,7 +21,7 @@ within MS Excel.
 
 Executing *xlsxcalendar* with the following options:
 ```bash
-python3 xlsxcalendar.py -s 2022-11-13 -e 2023-01-26
+python3 xlsxcalendar.py -s 2025-12-12 -e 2026-01-26
 ```
 Will create a calendar as described in the simple screenshot below.
 
@@ -30,10 +30,9 @@ Will create a calendar as described in the simple screenshot below.
 Enabling features like color-themes, local-holidays and importer plugin the
 generated calendar can be much more advanced as in the screenshot below.
 
-More information about setup, all bells and whistles for configuration can
-be read about under the [documentation][docs].
-
 ![](./documentation/images/enhanced_cal1.png)
 
+More information about setup, all bells and whistles for configuration can
+be read in the [documentation][docs] section.
 
 [docs]: ./documentation/README.md
