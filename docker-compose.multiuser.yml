@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - /home/etorhed/xlsxcalendar_keys:/app/keys
+      - ${HOME}/xlsxcalendar_keys:/app/keys
     environment:
       - PYTHONUNBUFFERED=1
       - STORAGE_SECRET=${STORAGE_SECRET:-}
