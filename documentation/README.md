@@ -32,11 +32,17 @@ Now you are ready to go, jump to the *Configuration* section below.
 
 ### Building a local docker image
 In case you would like to build the container locally here is an example.
-From the repo root directory where I provided a `Dockerfile` execute the command below. I removed my dockerhub identity from the image name and if you use the examples at dockerhub make sure to modify appropriately.
+From the repo root directory where I provided a `Dockerfile` execute the command below. 
+I removed my dockerhub identity from the image name and if you use the examples at dockerhub 
+make sure to modify appropriately.
 ```bash
 docker build --build-arg USER_ID=$(id -u) --build-arg GROUP_ID=$(id -g) \
 -t xlsxcalendar .
 ```
+
+### Multiuser web-server docker image
+`xlsxcalendar_multiuser.py` and associated files are currently experimental and in development.
+To be used at own risk.
 
 ### Manual setup/installation
 This setup is verified with python 3.12.3. Start with cloning the 
