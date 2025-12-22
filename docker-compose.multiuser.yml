@@ -1,0 +1,40 @@
+services:
+  xlsxcalendar-multiuser:
+    build:
+      context: .
+      dockerfile: Dockerfile.multiuser
+    ports:
+      - "8080:8080"
+    volumes:
+      - /home/etorhed/xlsxcalendar_keys:/app/keys
+    environment:
+      - PYTHONUNBUFFERED=1
+      - STORAGE_SECRET=${STORAGE_SECRET:-}
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+      - CHOWN
+
+  # Optional: Reverse proxy with SSL
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - xlsxcalendar-multiuser
+    profiles:
+      - ssl

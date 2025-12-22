@@ -1,0 +1,44 @@
+FROM python:3.12-slim
+
+# Install security updates
+RUN apt-get update && apt-get upgrade -y && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Create non-root user
+ARG USER_ID=1000
+ARG GROUP_ID=1000
+RUN groupadd -g $GROUP_ID appgroup && useradd -u $USER_ID -g appgroup -m appuser
+
+WORKDIR /xlsxcalendar
+
+# Copy application files
+COPY . /xlsxcalendar
+RUN chown -R appuser:appgroup /xlsxcalendar
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Create temp directory with proper permissions
+RUN mkdir -p /tmp/xlsxcal && chown appuser:appgroup /tmp/xlsxcal
+
+# Create a startup script to fix data directory permissions
+RUN echo '#!/bin/bash\nchown -R 1000:1000 /data 2>/dev/null || true\nchmod 755 /data 2>/dev/null || true\nexec su appuser -c "cd /xlsxcalendar && python3 xlsxcalendar_multiuser.py"' > /entrypoint.sh && chmod +x /entrypoint.sh
+
+# Security hardening
+RUN chmod 755 /xlsxcalendar
+RUN find /xlsxcalendar -name "*.py" -exec chmod 644 {} \;
+RUN chmod +x /xlsxcalendar/xlsxcalendar.py
+RUN chmod +x /xlsxcalendar/xlsxcalendar_multiuser.py
+
+# Expose port
+EXPOSE 8080
+
+# Switch to non-root user
+# USER appuser (removed - handled by entrypoint)
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD python3 -c "import requests; requests.get('http://localhost:8080', timeout=5)" || exit 1
+
+# Run multi-user service
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["python3", "xlsxcalendar_multiuser.py"]
